@@ -1,0 +1,92 @@
+
+<style>
+  body { margin: 0; }
+  .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-tertiary); margin: 1.5rem 0 0.6rem; }
+  .genre-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .genre-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.75rem 0.9rem; }
+  .genre-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 3px; }
+  .genre-ex { font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 8px; }
+  .pill-row { display: flex; gap: 5px; flex-wrap: wrap; }
+  .pill { font-size: 10px; padding: 2px 7px; border-radius: 20px; }
+  .pill-sat { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .pill-med { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .pill-low { background: var(--color-background-success); color: var(--color-text-success); }
+  .bar-row { display: flex; align-items: center; gap: 6px; margin-top: 7px; }
+  .bar-lbl { font-size: 10px; color: var(--color-text-tertiary); width: 36px; }
+  .bar-t { flex: 1; height: 3px; background: var(--color-border-tertiary); border-radius: 2px; }
+  .bar-f { height: 3px; border-radius: 2px; }
+  .bf-red  { background: #E24B4A; }
+  .bf-blue { background: #378ADD; }
+  .bf-grn  { background: #639922; }
+</style>
+
+<div class="section-label">Saturated — top genres, fierce competition</div>
+<div class="genre-grid">
+  <div class="genre-card">
+    <p class="genre-name">Roleplay / Social</p>
+    <p class="genre-ex">Brookhaven, Royale High, Adopt Me</p>
+    <div class="pill-row"><span class="pill pill-sat">Saturated</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:97%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:90%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Anime RPG / Grind</p>
+    <p class="genre-ex">Blox Fruits, Shindo Life, Anime Last Stand</p>
+    <div class="pill-row"><span class="pill pill-sat">Saturated</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:93%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:88%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Pet Simulator</p>
+    <p class="genre-ex">Pet Sim 99, Adopt Me economy</p>
+    <div class="pill-row"><span class="pill pill-sat">Saturated</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:88%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:85%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Tower Defense</p>
+    <p class="genre-ex">Anime Vanguards, All-Star TD, SpongeBob TD</p>
+    <div class="pill-row"><span class="pill pill-sat">Saturated</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:82%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:80%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Obby / Platformer</p>
+    <p class="genre-ex">Tower of Hell, Flood Escape</p>
+    <div class="pill-row"><span class="pill pill-sat">Saturated</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:78%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:72%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Tycoon Builder</p>
+    <p class="genre-ex">Restaurant Tycoon, Prison Tycoon</p>
+    <div class="pill-row"><span class="pill pill-sat">Saturated</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:76%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:75%"></div></div></div>
+  </div>
+</div>
+
+<div class="section-label">Medium competition — viable with a twist</div>
+<div class="genre-grid">
+  <div class="genre-card">
+    <p class="genre-name">Survival / Horror</p>
+    <p class="genre-ex">DOORS, Piggy, Rainbow Friends</p>
+    <div class="pill-row"><span class="pill pill-med">Competitive</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:80%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:58%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Shooter / PvP</p>
+    <p class="genre-ex">Arsenal, BedWars, Rivals</p>
+    <div class="pill-row"><span class="pill pill-med">Competitive</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:75%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:62%"></div></div></div>
+  </div>
+  <div class="genre-card">
+    <p class="genre-name">Farming / Idle</p>
+    <p class="genre-ex">Grow a Garden (broke records in 2025)</p>
+    <div class="pill-row"><span class="pill pill-med">Rising fast</span></div>
+    <div class="bar-row"><span class="bar-lbl">Demand</span><div class="bar-t"><div class="bar-f bf-blue" style="width:84%"></div></div></div>
+    <div class="bar-row"><span class="bar-lbl">Entry</span><div class="bar-t"><div class="bar-f bf-red" style="width:50%"></div></div></div>
+  </div>
+</div>

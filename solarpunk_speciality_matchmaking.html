@@ -1,0 +1,95 @@
+
+<style>
+  .sp-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; margin: 0.75rem 0; }
+  .sp-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.75rem 0.9rem; background: var(--color-background-primary); }
+  .sp-icon { width: 28px; height: 28px; border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+  .sp-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 3px; }
+  .sp-desc { font-size: 11px; color: var(--color-text-secondary); margin: 0 0 8px; line-height: 1.4; }
+  .sp-tasks { font-size: 10px; color: var(--color-text-tertiary); margin: 0; line-height: 1.6; }
+  .rank-row { display: flex; gap: 6px; margin: 0.75rem 0 0.25rem; align-items: center; }
+  .rank-pip { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; flex-shrink: 0; }
+  .rank-pip-filled { background: #1D9E75; color: #E1F5EE; }
+  .rank-pip-empty { background: var(--color-background-secondary); color: var(--color-text-tertiary); border: 0.5px solid var(--color-border-tertiary); }
+  .rank-label { font-size: 11px; color: var(--color-text-secondary); margin-left: 4px; }
+  .mm-box { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.9rem 1rem; margin: 0.75rem 0 0; background: var(--color-background-primary); }
+  .mm-row { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .mm-row:last-child { border-bottom: none; }
+  .mm-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .t-green { background: #EAF3DE; color: #3B6D11; }
+  .t-blue  { background: #E6F1FB; color: #185FA5; }
+  .t-amber { background: #FAEEDA; color: #854F0B; }
+  .mm-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .section-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 1rem 0 0.4rem; }
+</style>
+
+<h2 class="sr-only">Speciality system and matchmaking design for the solarpunk game</h2>
+
+<p class="section-lbl">The six specialities — each independently ranked, all switchable</p>
+<div class="sp-grid">
+  <div class="sp-card">
+    <div class="sp-icon" style="background:#EAF3DE;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="3" stroke="#3B6D11" stroke-width="1.2"/><path d="M4 14c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#3B6D11" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+    <p class="sp-name">Grower</p>
+    <p class="sp-desc">Restores food systems, seed banks, and soil health</p>
+    <p class="sp-tasks">Composting rigs · Crop rotation · Aquaponics · Seed trading</p>
+  </div>
+  <div class="sp-card">
+    <div class="sp-icon" style="background:#E6F1FB;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="10" width="10" height="4" rx="1" stroke="#185FA5" stroke-width="1.2"/><path d="M8 2v8M5 5l3-3 3 3" stroke="#185FA5" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <p class="sp-name">Sparkswright</p>
+    <p class="sp-desc">Repairs solar panels, wind turbines, and energy storage</p>
+    <p class="sp-tasks">Panel calibration · Battery banks · Grid routing · Microgrids</p>
+  </div>
+  <div class="sp-card">
+    <div class="sp-icon" style="background:#FAEEDA;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13c0-4 2-7 5-9M8 4c1 2 3 4 3 7" stroke="#854F0B" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="13" r="1.5" stroke="#854F0B" stroke-width="1.2"/></svg></div>
+    <p class="sp-name">Tidewarden</p>
+    <p class="sp-desc">Fixes water capture, filtration, and distribution</p>
+    <p class="sp-tasks">Rain catchment · Reed beds · Pipe repair · Cisterns</p>
+  </div>
+  <div class="sp-card">
+    <div class="sp-icon" style="background:#EEEDFE;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="5" height="8" rx="1" stroke="#534AB7" stroke-width="1.2"/><rect x="9" y="3" width="5" height="10" rx="1" stroke="#534AB7" stroke-width="1.2"/></svg></div>
+    <p class="sp-name">Fabricator</p>
+    <p class="sp-desc">Crafts tools, builds structures, repairs infrastructure</p>
+    <p class="sp-tasks">Material salvage · Workshop builds · Bike repair · Tools</p>
+  </div>
+  <div class="sp-card">
+    <div class="sp-icon" style="background:#FAECE7;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="#993C1D" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#993C1D" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+    <p class="sp-name">Weaver</p>
+    <p class="sp-desc">Builds community — trade routes, events, mutual aid networks</p>
+    <p class="sp-tasks">Market stalls · Skill-sharing · Town council · Festivals</p>
+  </div>
+  <div class="sp-card">
+    <div class="sp-icon" style="background:#E1F5EE;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12c1-3 4-5 4-5s3 2 4 5" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/><path d="M8 3v4" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+    <p class="sp-name">Rewinder</p>
+    <p class="sp-desc">Ecological restoration — rewilding, soil remediation, wetlands</p>
+    <p class="sp-tasks">Tree planting · Pollinator paths · Toxin cleanup · Wetlands</p>
+  </div>
+</div>
+
+<p class="section-lbl">Rank ladder — same for every speciality</p>
+<div class="rank-row">
+  <div class="rank-pip rank-pip-filled">1</div>
+  <div class="rank-pip rank-pip-filled">2</div>
+  <div class="rank-pip rank-pip-filled">3</div>
+  <div class="rank-pip rank-pip-empty">4</div>
+  <div class="rank-pip rank-pip-empty">5</div>
+  <div class="rank-pip rank-pip-empty">6</div>
+  <div class="rank-pip rank-pip-empty">7</div>
+  <div class="rank-pip rank-pip-empty">8</div>
+  <div class="rank-pip rank-pip-empty">9</div>
+  <span class="rank-label">Journeyman Sparkswright — switch speciality any time, keep all ranks</span>
+</div>
+
+<p class="section-lbl">How matchmaking works</p>
+<div class="mm-box">
+  <div class="mm-row">
+    <span class="mm-tag t-green">Town need</span>
+    <p class="mm-text">Each town broadcasts a "restoration board" — open tasks categorised by speciality and difficulty tier. A broken solar field needs 2 Sparkswrights (rank 3+). A dying watershed needs 1 Tidewarden + 1 Rewinder.</p>
+  </div>
+  <div class="mm-row">
+    <span class="mm-tag t-blue">Squad fill</span>
+    <p class="mm-text">Players queue with their active speciality and rank. The system builds squads of 2–4 players whose combined skills match what the town currently needs. A solo player gets matched to a complementary teammate, not a clone.</p>
+  </div>
+  <div class="mm-row">
+    <span class="mm-tag t-amber">Flex slot</span>
+    <p class="mm-text">One squad slot is always a wildcard — any speciality welcome. This prevents queue starvation for rare roles and lets curious players try a new speciality in low-stakes co-op before committing to rank it up.</p>
+  </div>
+</div>

@@ -1,0 +1,344 @@
+
+<style>
+  * { box-sizing: border-box; }
+  .top-tabs { display: flex; gap: 8px; margin-bottom: 1.25rem; }
+  .tab { flex: 1; padding: 10px 8px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); font-size: 13px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); cursor: pointer; text-align: center; transition: all .15s; }
+  .tab.active { background: var(--color-background-primary); color: var(--color-text-primary); border-color: var(--color-border-primary); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Shared card styles */
+  .two-col { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+  .game-col { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+  .col-header { padding: 10px 14px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .col-title { font-size: 13px; font-weight: 500; margin: 0 0 2px; color: var(--color-text-primary); }
+  .col-sub { font-size: 11px; color: var(--color-text-tertiary); margin: 0; }
+  .col-body { padding: 10px 14px 14px; }
+
+  /* Cozy headers = teal accent, Competitive = amber */
+  .cozy .col-header { background: var(--color-background-secondary); border-left: 3px solid #1D9E75; }
+  .comp .col-header { background: var(--color-background-secondary); border-left: 3px solid #BA7517; }
+
+  /* Monetization items */
+  .mono-item { margin-bottom: 11px; }
+  .mono-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
+  .mono-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+  .mono-badge { font-size: 10px; padding: 1px 7px; border-radius: 20px; }
+  .b-hi { background: var(--color-background-success); color: var(--color-text-success); }
+  .b-med { background: var(--color-background-warning); color: var(--color-text-warning); }
+  .b-lo { background: var(--color-background-danger); color: var(--color-text-danger); }
+  .mono-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; margin: 0; }
+  .bar-wrap { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+  .bar-lbl { font-size: 10px; color: var(--color-text-tertiary); width: 58px; }
+  .bar-t { flex: 1; height: 3px; background: var(--color-border-tertiary); border-radius: 2px; }
+  .bar-f { height: 3px; border-radius: 2px; }
+  .teal { background: #1D9E75; }
+  .amber { background: #BA7517; }
+  .divider { height: 0.5px; background: var(--color-border-tertiary); margin: 10px 0; }
+
+  /* Live ops timeline */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-badge { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; min-width: 56px; text-align: center; margin-top: 1px; }
+  .teal-badge { background: #E1F5EE; color: #0F6E56; }
+  .amber-badge { background: #FAEEDA; color: #854F0B; }
+  .tl-content { flex: 1; }
+  .tl-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
+  .tl-desc { font-size: 11px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+
+  /* Revenue mix donut placeholder — just a visual summary row */
+  .rev-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .rev-chip { font-size: 10px; padding: 3px 8px; border-radius: 20px; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+
+  /* Trap / watch-out */
+  .watchout { background: var(--color-background-danger); border-radius: var(--border-radius-md); padding: 7px 10px; margin-top: 10px; }
+  .watchout p { font-size: 11px; color: var(--color-text-danger); margin: 0; line-height: 1.5; }
+  .watchout strong { font-weight: 500; }
+
+  .section-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0 0 8px; }
+</style>
+
+<div class="top-tabs">
+  <div class="tab active" onclick="switchTab('mono')">Monetization</div>
+  <div class="tab" onclick="switchTab('liveops')">Live ops</div>
+  <div class="tab" onclick="switchTab('compare')">Head-to-head</div>
+</div>
+
+<!-- MONETIZATION PANEL -->
+<div class="panel active" id="panel-mono">
+  <div class="two-col">
+    <div class="game-col cozy">
+      <div class="col-header">
+        <p class="col-title">Cozy crafting village</p>
+        <p class="col-sub">Identity + decoration monetization</p>
+      </div>
+      <div class="col-body">
+        <p class="section-lbl">Revenue levers</p>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Cosmetic home & plot items</span><span class="mono-badge b-hi">Primary</span></div>
+          <p class="mono-desc">Seasonal furniture, rare flower seeds, cottage themes. No gameplay impact — pure expression. Drives repeat spend as catalogue grows.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f teal" style="width:88%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Starter / founder game pass</span><span class="mono-badge b-hi">Primary</span></div>
+          <p class="mono-desc">One-time purchase (299–499R). Unlocks a unique plot size, starter pet, or cosmetic title. High conversion on engaged early players.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f teal" style="width:82%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Seasonal battle pass</span><span class="mono-badge b-med">Secondary</span></div>
+          <p class="mono-desc">6–8 week seasons with a free + premium track. Premium track (299R) gives exclusive cosmetics. Keeps the playerbase on a shared calendar.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f teal" style="width:74%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Rewarded video ads</span><span class="mono-badge b-med">Secondary</span></div>
+          <p class="mono-desc">Opt-in ads (launched 2025) for non-spenders. Award bonus crafting resources or time skips. Monetizes the ~80% who never pay with Robux.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f teal" style="width:55%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Random seed / loot packs</span><span class="mono-badge b-lo">Use carefully</span></div>
+          <p class="mono-desc">Grow a Garden used randomised drops — worked but drew loot-box criticism. Frame as "mystery bundles" with a guaranteed floor item to stay player-trust positive.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f teal" style="width:65%"></div></div></div>
+        </div>
+
+        <div class="rev-row">
+          <span class="rev-chip">~55% cosmetics</span>
+          <span class="rev-chip">~25% game passes</span>
+          <span class="rev-chip">~12% battle pass</span>
+          <span class="rev-chip">~8% ads</span>
+        </div>
+
+        <div class="watchout">
+          <p><strong>Avoid:</strong> Any pay-to-progress mechanic. Cozy audiences churn hard when they feel pressure. Monetize the look, never the loop.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-col comp">
+      <div class="col-header">
+        <p class="col-title">AI NPC competitive crafting</p>
+        <p class="col-sub">Progression + advantage monetization</p>
+      </div>
+      <div class="col-body">
+        <p class="section-lbl">Revenue levers</p>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Convenience game passes</span><span class="mono-badge b-hi">Primary</span></div>
+          <p class="mono-desc">Extra crafting slots, faster NPC respawn, auto-collect pass (499–799R). Reduces friction without hard pay-to-win. High perceived value in time-pressure games.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f amber" style="width:90%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Competitive season pass</span><span class="mono-badge b-hi">Primary</span></div>
+          <p class="mono-desc">Ranked seasons (4–5 weeks). Premium track unlocks prestige cosmetics + end-of-season title. Leaderboard urgency = strong conversion. Set at 299R.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f amber" style="width:85%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">NPC character skins / voices</span><span class="mono-badge b-med">Secondary</span></div>
+          <p class="mono-desc">Cosmetic reskins of your AI NPC companions — different visual styles, catchphrases, animation sets. Creates a companion-collecting sub-loop without affecting balance.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f amber" style="width:70%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Dev products (one-time boosts)</span><span class="mono-badge b-med">Secondary</span></div>
+          <p class="mono-desc">Consumable resource bundles (50–100R) timed around events. "Challenge pack" ahead of a tournament. Low friction, impulse buy format.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f amber" style="width:60%"></div></div></div>
+        </div>
+
+        <div class="mono-item">
+          <div class="mono-head"><span class="mono-name">Rewarded video ads</span><span class="mono-badge b-med">Secondary</span></div>
+          <p class="mono-desc">Offer a free resource roll or cooldown skip. Competitive players tolerate ads for meaningful in-round advantages. Cap at 3/day to avoid saturation.</p>
+          <div class="bar-wrap"><span class="bar-lbl">Rev potential</span><div class="bar-t"><div class="bar-f amber" style="width:52%"></div></div></div>
+        </div>
+
+        <div class="rev-row">
+          <span class="rev-chip">~40% game passes</span>
+          <span class="rev-chip">~30% season pass</span>
+          <span class="rev-chip">~18% dev products</span>
+          <span class="rev-chip">~12% ads</span>
+        </div>
+
+        <div class="watchout">
+          <p><strong>Avoid:</strong> Selling stronger NPC behavior (smarter allies) for Robux. If AI gives paying players an unfair edge, trust collapses fast.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE OPS PANEL -->
+<div class="panel" id="panel-liveops">
+  <div class="two-col">
+
+    <div class="game-col cozy">
+      <div class="col-header">
+        <p class="col-title">Cozy crafting — live ops calendar</p>
+        <p class="col-sub">Seasonal, low-pressure, community-driven</p>
+      </div>
+      <div class="col-body">
+        <p class="section-lbl">Cadence</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-badge teal-badge">Week 1–2</span>
+            <div class="tl-content">
+              <p class="tl-title">Launch with a "Founding Festival"</p>
+              <p class="tl-desc">Limited founder items (never returns). Drives urgency without FOMO toxicity — players feel special, not pressured.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge teal-badge">Monthly</span>
+            <div class="tl-content">
+              <p class="tl-title">Seasonal theme drop</p>
+              <p class="tl-desc">New craftable item set tied to real-world season or holiday. Spring market, winter lantern festival, harvest moon. Themed items exit the shop after 3–4 weeks.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge teal-badge">Biweekly</span>
+            <div class="tl-content">
+              <p class="tl-title">Community garden event</p>
+              <p class="tl-desc">Server-wide collaborative goal (e.g. plant 1M flowers together). All players contribute, all get a shared reward. Builds the "we" feeling cozy games live on.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge teal-badge">Weekly</span>
+            <div class="tl-content">
+              <p class="tl-title">New recipe unlock</p>
+              <p class="tl-desc">One new free crafting recipe per week. Tiny lift — but gives a reason to log in and check. Low dev cost, high habit-forming value.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge teal-badge">Quarterly</span>
+            <div class="tl-content">
+              <p class="tl-title">New biome / area expansion</p>
+              <p class="tl-desc">Biggest update of the quarter. New zone with new crops, crafts, and an NPC story arc. This is your re-engagement hook for lapsed players.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-col comp">
+      <div class="col-header">
+        <p class="col-title">AI competitive crafting — live ops calendar</p>
+        <p class="col-sub">Season-based, urgency-driven, content-dense</p>
+      </div>
+      <div class="col-body">
+        <p class="section-lbl">Cadence</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-badge amber-badge">Week 1</span>
+            <div class="tl-content">
+              <p class="tl-title">Pre-season soft launch</p>
+              <p class="tl-desc">Launch with unranked mode only. Let players learn mechanics before ranked opens. Reduces churn from skill-gap frustration on day one.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge amber-badge">4–5 wks</span>
+            <div class="tl-content">
+              <p class="tl-title">Ranked season with prestige rewards</p>
+              <p class="tl-desc">Leaderboard resets each season. End-of-season cosmetics go to top X% — exclusive titles, NPC skins. Creates urgency and a reason to grind every season.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge amber-badge">Weekly</span>
+            <div class="tl-content">
+              <p class="tl-title">NPC personality / challenge rotation</p>
+              <p class="tl-desc">Rotate which AI NPC types appear in lobbies. "The Saboteur Week" — NPCs with tricky behavior. Keeps meta fresh without requiring full new content builds.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge amber-badge">Biweekly</span>
+            <div class="tl-content">
+              <p class="tl-title">Tournament event</p>
+              <p class="tl-desc">48-hour bracket. Winner-take-all exclusive cosmetic. High-engagement spike, huge clip/share potential on TikTok/YouTube — organic growth lever.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-badge amber-badge">Monthly</span>
+            <div class="tl-content">
+              <p class="tl-title">New crafting mechanic / recipe tier</p>
+              <p class="tl-desc">Major meta shift. New recipe tier that changes competitive balance — forces players to relearn and re-engage. Most important retention tool for competitive games.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- HEAD TO HEAD PANEL -->
+<div class="panel" id="panel-compare">
+  <div style="overflow-x:auto;">
+    <table style="width:100%; border-collapse:collapse; font-size:12px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:500;color:var(--color-text-tertiary);font-size:11px;width:26%">Dimension</th>
+          <th style="text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:500;color:#0F6E56;font-size:11px;">Cozy crafting</th>
+          <th style="text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);font-weight:500;color:#854F0B;font-size:11px;">AI competitive crafting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Revenue ceiling</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">High — large audience, proven by Grow a Garden's $12M/mo</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Medium-high — smaller but higher-spend competitive audience</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Revenue predictability</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Smooth — cosmetics sell steadily between events</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Spiky — revenue clusters around tournament and season events</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Session length</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Long (45–90 min) — players settle in and decorate</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Medium (15–35 min) — round-based, natural stop points</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">DAU/MAU ratio</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Lower (25–35%) — players return on events, not daily</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Higher (40–55%) — ranked anxiety keeps players logging in</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Live ops dev load</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Light — seasonal content, asset swaps, new recipes</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Heavy — balance patches, NPC model updates, season resets</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Viral growth vector</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Screenshots & "show your plot" social sharing</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Tournament clips, NPC chaos moments on TikTok/YouTube</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Primary audience</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">F, 13–24, APAC-heavy, casual spend</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">M/F, 13–20, global, higher per-session spend</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);font-weight:500">Biggest risk</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Content drought — players idle without new things to make</td>
+          <td style="padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)">Balance chaos — AI NPCs feeling unfair kills competitive trust</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;color:var(--color-text-tertiary);font-weight:500">1-month buildability</td>
+          <td style="padding:8px 10px;color:var(--color-text-secondary)">High — core loop is simple, AI not required at launch</td>
+          <td style="padding:8px 10px;color:var(--color-text-secondary)">Medium — AI NPC integration adds meaningful complexity</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['mono','liveops','compare'][i] === id));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+}
+</script>

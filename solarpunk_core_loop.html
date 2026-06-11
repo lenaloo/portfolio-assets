@@ -1,0 +1,95 @@
+
+<style>
+  .loop-wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; padding: 0.75rem 0; }
+  .loop-col { display: flex; flex-direction: column; gap: 8px; }
+  .lcard { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.8rem 1rem; background: var(--color-background-primary); }
+  .lcard-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .lcard-num { width: 20px; height: 20px; border-radius: 50%; font-size: 10px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .n-teal { background: #9FE1CB; color: #085041; }
+  .n-green { background: #C0DD97; color: #27500A; }
+  .n-amber { background: #FAC775; color: #633806; }
+  .n-purple { background: #CECBF6; color: #3C3489; }
+  .lcard-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+  .lcard-body { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; margin: 0; }
+  .arrow-down { text-align: center; font-size: 14px; color: var(--color-text-tertiary); margin: 2px 0; }
+  .section-lbl { font-size: 10px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 0.5rem 0 0.3rem; }
+  .col-hd { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin: 0 0 6px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .insight-row { display: flex; gap: 8px; margin-top: 10px; }
+  .insight { flex: 1; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 8px 10px; background: var(--color-background-secondary); }
+  .insight-label { font-size: 10px; color: var(--color-text-tertiary); margin: 0 0 3px; }
+  .insight-val { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+</style>
+
+<h2 class="sr-only">Core game loop for the solarpunk crafting game</h2>
+
+<div class="loop-wrap">
+  <div class="loop-col">
+    <p class="col-hd">Session loop (per visit)</p>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-teal">1</div><span class="lcard-title">Arrive at a town</span></div>
+      <p class="lcard-body">Travel between towns on a craftable solar bike, train, or glider depending on your tier. The journey is short but scenic — loading screen replaced by a mini travel moment.</p>
+    </div>
+    <div class="arrow-down">↓</div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-teal">2</div><span class="lcard-title">Read the restoration board</span></div>
+      <p class="lcard-body">The town's needs are displayed: broken panels on the south roof, collapsed irrigation ditch, empty seed library. You pick tasks that match your speciality or queue for a matched squad.</p>
+    </div>
+    <div class="arrow-down">↓</div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-teal">3</div><span class="lcard-title">Gather, craft, install</span></div>
+      <p class="lcard-body">Forage or salvage materials nearby. Craft the needed component at a workbench. Install it in the world — the broken thing visually transforms. Other players see your fix immediately.</p>
+    </div>
+    <div class="arrow-down">↓</div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-teal">4</div><span class="lcard-title">Town health ticks up</span></div>
+      <p class="lcard-body">A visible progress bar on the town fills. Hit milestones (25%, 50%, 75%, 100%) to trigger collective celebrations — the town lights up, NPCs throw a small festival, new areas unlock.</p>
+    </div>
+    <div class="arrow-down">↓</div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-teal">5</div><span class="lcard-title">Earn rank + move on</span></div>
+      <p class="lcard-body">Completing tasks earns XP in your active speciality. Hit rank thresholds to unlock harder quests, new towns, and better crafting recipes. Return to any town you've been to, any time.</p>
+    </div>
+  </div>
+
+  <div class="loop-col">
+    <p class="col-hd">What makes it feel solarpunk</p>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-green">A</div><span class="lcard-title">Nothing is destroyed — only fixed</span></div>
+      <p class="lcard-body">No combat, no villains. The "enemy" is entropy and neglect. Quests are always constructive: repair, restore, plant, connect. This holds the cozy tone without being saccharine.</p>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-green">B</div><span class="lcard-title">The world visibly changes</span></div>
+      <p class="lcard-body">Restored towns look different — solar panels gleam on rooftops, gardens bloom, lights glow at night. Players who return after weeks away see the town transformed. That's the emotional payoff.</p>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-green">C</div><span class="lcard-title">Skills feel grounded and real</span></div>
+      <p class="lcard-body">Sparkswright tasks teach real concepts — panel angle matters, battery chemistry affects storage. Grower quests involve real crop companions. Light educational layer; never preachy.</p>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-green">D</div><span class="lcard-title">Community is the meta-game</span></div>
+      <p class="lcard-body">A fully restored town unlocks a player-run market and communal build space. Veterans return to trade with new arrivals. The "end game" is becoming a mentor in a thriving place you helped build.</p>
+    </div>
+
+    <div class="lcard">
+      <div class="lcard-head"><div class="lcard-num n-amber">AI</div><span class="lcard-title">Where AI adds real value</span></div>
+      <p class="lcard-body">NPC town elders remember your previous visits and comment on your work. An AI Roblox assistant can procedurally generate quest variants so no two Tidewarden jobs feel identical. Keeps replay value high without heavy content dev.</p>
+    </div>
+  </div>
+</div>
+
+<div class="insight-row">
+  <div class="insight"><p class="insight-label">Specialities available</p><p class="insight-val">6</p></div>
+  <div class="insight"><p class="insight-label">Max rank per spec.</p><p class="insight-val">9</p></div>
+  <div class="insight"><p class="insight-label">Squad size</p><p class="insight-val">2–4</p></div>
+  <div class="insight"><p class="insight-label">Towns at launch</p><p class="insight-val">4–6</p></div>
+  <div class="insight"><p class="insight-label">Session target</p><p class="insight-val">20–45 min</p></div>
+</div>
